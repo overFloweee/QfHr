@@ -27,14 +27,17 @@
   </div>
 </template>
 <script>
+import request from "@/utils/request";
+import * as url from "url";
+
 export default {
   name: 'Login',
   data() {
     return {
       loginForm: {
-        phone: '',
-        password: '',
-        isAgree: ''
+        phone: '13800000002',
+        password: 'hm#qd@23!',
+        isAgree: true
       },
       loginRules: {
         phone: [
@@ -67,7 +70,7 @@ export default {
     login() {
       this.$refs.form.validate((isOK) => {
         if (isOK) {
-          alert('校验通过')
+          this.$store.dispatch('user/login', this.loginForm)
         }
       })
     }
