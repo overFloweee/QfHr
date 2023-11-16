@@ -1,4 +1,5 @@
 import {getToken, setToken, removeToken} from "@/utils/auth";
+import {login} from '@/api/user'
 
 const state = {
   // 从缓存中读取token数据
@@ -11,8 +12,7 @@ const mutations = {
     // token同步到缓存中
     setToken(token)
   },
-  removeToken(state)
-  {
+  removeToken(state) {
     // 删除vuex中的token
     state.token = null
     removeToken()
@@ -20,12 +20,11 @@ const mutations = {
 }
 
 const actions = {
-  login(context, loginData) {
-    console.log(loginData)
+  async login(context, loginData) {
     // 调用登陆接口
+    const token = await login(loginData)
 
-
-    context.commit('setToken', '123456')
+    context.commit('setToken', token)
 
   }
 }
