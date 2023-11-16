@@ -1,5 +1,5 @@
 import {getToken, setToken, removeToken} from "@/utils/auth";
-import {login} from '@/api/user'
+import {login} from "@/api/user";
 
 const state = {
   // 从缓存中读取token数据
@@ -21,8 +21,9 @@ const mutations = {
 
 const actions = {
   async login(context, loginData) {
+
     // 调用登陆接口
-    const token = await login(loginData)
+    let token = await login(loginData);
 
     context.commit('setToken', token)
 

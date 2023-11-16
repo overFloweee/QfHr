@@ -5,7 +5,10 @@ export function login(loginData){
     {
       url:'/sys/login',
       method: 'post',
-      data: loginData
+      data: {
+        mobile: loginData.phone,
+        password: loginData.password
+      }
     }
   )
 }

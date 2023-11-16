@@ -27,6 +27,8 @@
   </div>
 </template>
 <script>
+import request from "@/utils/request";
+import * as url from "url";
 
 export default {
   name: 'Login',
@@ -68,8 +70,10 @@ export default {
     login() {
       this.$refs.form.validate((isOK) => {
         if (isOK) {
-          // vuex 中的 异步 actions
+          // Vuex 中 actions 返回的是 promise
           this.$store.dispatch('user/login', this.loginForm)
+
+          this.$router.push('/')
         }
       })
     }
