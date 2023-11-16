@@ -11,10 +11,8 @@ router.beforeEach(async (to, from, next) => {
   // 进度条的开始
   NProgress.start()
 
-  console.log(store.getters.token)
   // 存在token
   if (store.getters.token) {
-    console.log(to.path)
     // 判断是否 访问 登陆页
     if (to.path === '/login') {
       // 跳转到主页
