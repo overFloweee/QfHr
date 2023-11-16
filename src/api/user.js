@@ -13,3 +13,11 @@ export function login(loginData){
   )
 }
 
+export function getUserInfo(){
+  return request(
+    {
+      url:'/sys/profile',
+      method: 'get'
+    }
+  )
+}

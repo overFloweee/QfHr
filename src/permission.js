@@ -19,7 +19,11 @@ router.beforeEach(async (to, from, next) => {
       next('/dashboard')
       NProgress.done()
     } else {
-      // 放过，到登录页
+      // 放过
+      // 在主页中判断是否已经获取过 用户信息
+      if (!store.getters.userId) {
+        await store.dispatch('user/getUserInfo')
+      }
       next()
     }
   } else {

@@ -16,7 +16,7 @@ service.interceptors.request.use(
     // 取到token,如果存在就 在请求头中注入 token
     let token = store.getters.token;
     if (token) {
-      config.headers.authorization = 'Bearer' + token
+      config.headers.authorization = 'Bearer ' + token
 
     }
 
