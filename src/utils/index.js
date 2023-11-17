@@ -2,6 +2,8 @@
  * Created by PanJiaChen on 16/11/18.
  */
 
+import ar from "element-ui/src/locale/lang/ar";
+
 /**
  * Parse the time to string
  * @param {(Object|string|number)} time
@@ -45,7 +47,9 @@ export function parseTime(time, cFormat) {
   const time_str = format.replace(/{([ymdhisa])+}/g, (result, key) => {
     const value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
-    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value ] }
+    if (key === 'a') {
+      return ['日', '一', '二', '三', '四', '五', '六'][value]
+    }
     return value.toString().padStart(2, '0')
   })
   return time_str
@@ -114,4 +118,25 @@ export function param2Obj(url) {
     }
   })
   return obj
+}
+
+
+/**
+ * 列表形 数据 转树形
+ */
+export function transListToTreeData(list, rootValueId) {
+  const arr = []
+
+  list.forEach(item => {
+    if (item.pid === rootValueId) {
+      // 找到了根节点
+      arr.push(item)
+      // 父亲.id == 儿子.pid
+      const children = transListToTreeData(list,item.id)
+      item.children = children  // 将子节点 赋值给当前节点
+    }
+  })
+
+  return arr
+
 }
