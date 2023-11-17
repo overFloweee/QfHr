@@ -21,3 +21,14 @@ export function getUserInfo(){
     }
   )
 }
+
+export function updatePassword(passFormData)
+{
+  return request(
+    {
+      url:'/sys/user/updatePass',
+      method: 'put',
+      data: passFormData
+    }
+  )
+}

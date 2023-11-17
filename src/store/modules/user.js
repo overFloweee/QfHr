@@ -35,6 +35,12 @@ const actions = {
     // 发送axios请求，获取用户信息
     const result = await getUserInfo()
     context.commit('setUserInfo',result)
+  },
+  logout(context)
+  {
+    // 退出登陆，删除token，删除用户信息
+    context.commit('removeToken')
+    context.commit('setUserInfo',{})
   }
 }
 

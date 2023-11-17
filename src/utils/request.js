@@ -3,6 +3,7 @@ import {error} from "autoprefixer/lib/utils";
 import store from "@/store";
 import Message from "element-ui/packages/message";
 import da from "element-ui/src/locale/lang/da";
+import router from "@/router";
 
 const service = axios.create({
   baseURL: '/api',
@@ -39,8 +40,18 @@ service.interceptors.response.use(
       return Promise.reject(new Error(message))
     }
   },
-  (error) => {
-    // 失败执行第二个
+  async (error) => {
+    // 响应失败执行第二个
+    if (error.response.status === 401) {
+      Message({type: 'warning', message: 'token已过期，请重新登陆'})
+      // token 超时,调用actions 退出登陆
+      let response = await store.dispatch('user/logout')
+      router.push('/login')
+      return Promise.reject(error)
+
+    }
+
+
     Message({type: 'error', message: error.message})
     return Promise.reject(error)
 
